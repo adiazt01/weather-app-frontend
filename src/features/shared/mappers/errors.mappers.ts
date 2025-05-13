@@ -1,7 +1,6 @@
 import type { ErrorApi } from "../interfaces/errors-api.interface";
 
 export const mapResponseError = (error: any): ErrorApi => {
-    console.log('Error:', error);
     if (error.response) {
         return {
             message: error.response.data?.message || 'Ocurrió un error inesperado.',

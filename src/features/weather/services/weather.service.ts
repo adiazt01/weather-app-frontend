@@ -33,7 +33,6 @@ export const getForecast = async ({ city }: { city: string}): Promise<Forecast> 
 export const getAutoComplete = async ({ city }: { city: string }): Promise<AutoComplete> => {
     try {
         const response = await http.get<AutoCompleteResponse>(`/weather/autocomplete?city=${city}`)
-        console.log(response.data)
         return mapAutoCompleteResponseToCities(response.data)
     } catch (error) {
         throw mapResponseError(error)

@@ -1,8 +1,7 @@
-import type { Current } from "../interface/current.interface";
+import type { CurrentWeather } from "../interface/current.interface";
 import type { CurrentResponse } from "../interface/responses/current-response.interface";
 
-export const mapCurrentResponseToCurrent = (currentResponse:CurrentResponse) : Current => {
-    console.log(currentResponse);
+export const mapCurrentResponseToCurrent = (currentResponse:CurrentResponse) : CurrentWeather => {
     return {
         location: {
             city: currentResponse.location.city,

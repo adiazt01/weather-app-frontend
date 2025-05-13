@@ -132,7 +132,6 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
                       size="icon"
                       onClick={(e) => {
                         e.stopPropagation()
-                        console.log(city)
                         toggleFavorite({
                           country: city.country,
                           latitude: city.latitude,

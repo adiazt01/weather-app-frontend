@@ -17,14 +17,12 @@ const http = axios.create({
 http.interceptors.request.use(
     (config) => {
         const token = getToken();
-        console.log("Token: ", token);
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
     },
     (error) => {
-        console.error("Request error: ", error);
         return Promise.reject(error);
     }
 );
