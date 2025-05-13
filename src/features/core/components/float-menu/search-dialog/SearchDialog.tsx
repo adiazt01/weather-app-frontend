@@ -13,7 +13,7 @@ import { useFavoritesStore } from "@/features/weather/stores/favorites.store"
 import { useAuthStore } from "@/features/auth/stores/auth.store"
 import { useState, useEffect } from "react"
 import type { CityFavorite } from "@/features/weather/interface/city-favorite.interface"
-import { useSearchHistoryStore } from "../../stores/search-history.store"
+import { useSearchHistoryStore } from "../../../stores/search-history.store"
 import { useMutation } from "@tanstack/react-query"
 import { useDebounce } from "@/hooks/useDebounce"
 import { getAutoComplete } from "@/features/weather/services/weather.service"
@@ -34,7 +34,7 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
   const [searchQuery, setSearchQuery] = useState("")
   const debouncedSearchQuery = useDebounce(searchQuery, 300)
   const [searchResults, setSearchResults] = useState<AutoComplete[]>([])
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
 
 
   const mutation = useMutation({

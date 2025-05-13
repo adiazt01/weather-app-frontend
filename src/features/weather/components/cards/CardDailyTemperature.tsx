@@ -34,13 +34,6 @@ export const CardDailyTemperature = ({ currentWeather, forecast, isLoading }: Ca
         <Card>
             <CardHeader>
                 <CardTitle className="text-base font-medium">Temperatura durante el día</CardTitle>
-                <CardDescription className="text-sm text-muted-foreground">
-                    <div className="flex flex-col">
-                        <span className="text-base font-medium">
-                            {currentWeather?.weather.condition.description || "Cargando..."}
-                        </span>
-                    </div>
-                </CardDescription>
             </CardHeader>
             <CardContent className="h-[200px]">
                 {!isLoading && forecast?.forecast.days[0]?.hourly && <HourlyChartLine forecast={forecast} />}

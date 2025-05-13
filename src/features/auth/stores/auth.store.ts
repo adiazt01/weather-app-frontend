@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { signIn, signUp } from '../services/auth.service';
 import type { AuthUser } from '../interface/auth-user.interface';
 import type { SignInParams, SignUpParams } from '../interface/auth-service.interface';
+import { useFavoritesStore } from '@/features/weather/stores/favorites.store';
 
 interface AuthState {
   user: AuthUser | null;
@@ -69,7 +70,7 @@ export const useAuthStore = create<AuthState>()(
           }
         },
         logout: () => {
-          set({ user: null });
+          set({ user: null, isAuthenticated: false });
         },
       }),
       {
@@ -79,3 +80,12 @@ export const useAuthStore = create<AuthState>()(
     )
   )
 );
+
+useAuthStore.subscribe((state) => {
+  if (!state.isAuthenticated) {
+    const clearFavorites = useFavoritesStore.getState().clearFavorites;
+    if (clearFavorites) {
+      clearFavorites();
+    }
+  }
+});

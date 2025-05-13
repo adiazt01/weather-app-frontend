@@ -12,15 +12,23 @@ import { RegisterForm } from "@/features/auth/components/forms/RegisterForm";
 import { Separator } from "@/components/ui/separator";
 import { useFavoritesStore } from "@/features/weather/stores/favorites.store";
 import type { CityFavorite } from "@/features/weather/interface/city-favorite.interface";
+import { motion } from "motion/react";
+import { useSearchParams } from "react-router";
 
 export const UserMenu = () => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
-    const { isAuthenticated, user } = useAuthStore((state) => state);
+    const { isAuthenticated, user, logout } = useAuthStore((state) => state);
     const { searchHistory } = useSearchHistoryStore((state) => state)
     const { favorites, addFavorite, removeFavorite } = useFavoritesStore((state) => state);
+    const [_, setSearchParams] = useSearchParams();
 
     const handleAddFavorite = (city: CityFavorite) => {
         addFavorite(city);
+    };
+
+    const handleSelectCity = (city: CityFavorite) => {
+        setSearchParams({ city: city.name });
+        setUserMenuOpen(false);
     };
 
     const handleRemoveFavorite = (id: string) => {
@@ -34,12 +42,16 @@ export const UserMenu = () => {
     return (
         <Sheet open={userMenuOpen} onOpenChange={setUserMenuOpen}>
             <SheetTrigger asChild>
-                <Button size="icon" className="rounded-full h-12 w-12 shadow-lg">
-                    <Avatar>
-                        <AvatarImage />
-                        <AvatarFallback>{isAuthenticated ? user?.email.charAt(0) : <User />}</AvatarFallback>
-                    </Avatar>
-                </Button>
+                <motion.div
+                    whileHover={{
+                        scale: 1.2,
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                >
+                    <Button size="icon" className="rounded-full h-12 w-12 shadow-lg">
+                        <User className="size-6" />
+                    </Button>
+                </motion.div>
             </SheetTrigger>
             <SheetContent side="right" className="px-4">
                 <SheetHeader className="pb-0">
@@ -100,7 +112,10 @@ export const UserMenu = () => {
                                         <div
                                             key={city.id}
                                             className="flex items-center justify-between p-3 rounded-md hover:bg-muted cursor-pointer"
-                                        // onClick={() => (city)}
+
+                                            onClick={() => {
+                                                handleSelectCity(city);
+                                            }}
                                         >
                                             <div className="flex items-center gap-2">
                                                 <History className="h-4 w-4 text-muted-foreground" />
@@ -131,9 +146,9 @@ export const UserMenu = () => {
                             </TabsContent>
                         </Tabs>
 
-                        {/* <Button variant="destructive" className="w-full" onClick={handleLogout}>
-              Cerrar sesión
-            </Button> */}
+                        <Button variant="destructive" className="w-full" onClick={logout}>
+                            Cerrar sesión
+                        </Button>
                     </div>
                 ) : (
                     <div className="py-6 space-y-4">

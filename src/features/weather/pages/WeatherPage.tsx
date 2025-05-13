@@ -26,17 +26,15 @@ export const WeatherPage = () => {
                         Ocurrio un error al obtener la información del clima. Por favor verifica que la ciudad sea correcta o intenta nuevamente más tarde.
                     </p>
                 </div>
-                <FloatingMenu />
             </div>
         )
     }
 
     return (
-        <div className="flex min-h-screen flex-1 justify-center flex-col gap-6 p-6 bg-white dark:bg-slate-950 mx-auto w-full max-w-screen-sm">
+        <div className="flex min-h-screen flex-1 justify-center flex-col gap-6 p-6 mx-auto w-full max-w-screen-sm">
             <CardWeatherHeader currentWeather={currentWeather} isLoading={isFetching} />
             <CardHourlyForecast forecast={forecast} isLoading={isFetchingForecast} />
             <CardDailyTemperature currentWeather={currentWeather} forecast={forecast} isLoading={isFetching} />
-            <FloatingMenu />
         </div>
     )
 }

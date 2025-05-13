@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { UserMenu } from "./UserMenu";
-import { SearchButton } from "./SearchButton";
-import { SearchDialog } from "./SearchDialog";
+import { UserMenu } from "./user-menu/UserMenu";
+import { SearchButton } from "./search-button/SearchButton";
+import { SearchDialog } from "./search-dialog/SearchDialog";
 
 export const FloatingMenu = () => {
   const [open, setOpen] = useState(false)

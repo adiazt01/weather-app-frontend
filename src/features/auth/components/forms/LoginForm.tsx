@@ -58,6 +58,8 @@ export const LoginForm = ({
     mutation.mutate(data);
   };
 
+  console.log(errors);
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden">
@@ -153,7 +155,7 @@ export const LoginForm = ({
                     <Alert variant="destructive">
                       <KeyRound className="h-4 w-4" />
                       <AlertTitle>Error al iniciar sesión</AlertTitle>
-                      <AlertDescription>{errors.root.message}</AlertDescription>
+                      <AlertDescription>{errors.root?.message?.message || "Ha ocurrido un error desconocido"}</AlertDescription>
                     </Alert>
                   </motion.div>
                 )}

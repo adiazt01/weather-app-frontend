@@ -1,33 +1,15 @@
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb"
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "../components/app-sidebar/AppSidebar"
-import { Separator } from "@/components/ui/separator"
 import { Outlet } from "react-router"
+import { FloatingMenu } from "../components/float-menu/FloatMenu"
 
 export const Layout = () => {
     return (
-        <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>
-                <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-                    <SidebarTrigger className="-ml-1" />
-                    <Separator orientation="vertical" className="mr-2 h-4" />
-                    <Breadcrumb>
-                        <BreadcrumbList>
-                            <BreadcrumbItem className="hidden md:block">
-                                <BreadcrumbLink href="#">
-                                    Building Your Application
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator className="hidden md:block" />
-                            <BreadcrumbItem>
-                                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
-                </header>
-                <Outlet />
-            </SidebarInset>
-        </SidebarProvider>
+        <>
+            <Outlet />
+            <FloatingMenu />
+            <div
+                className="absolute -z-10 inset-0 h-full w-full bg-white bg-[radial-gradient(rgba(0,0,0,0.02)_16px,transparent_16px)] 
+                [background-size:64px_64px]"
+            ></div>
+        </>
     )
 }

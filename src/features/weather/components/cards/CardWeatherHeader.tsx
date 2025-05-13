@@ -42,9 +42,6 @@ export const CardWeatherHeader = ({ currentWeather, isLoading }: CardWeatherHead
                             <h2 className="text-6xl font-medium tracking-tight">
                                 {currentWeather.weather.temperature.celsius}°
                             </h2>
-                            <span className="text-sm text-muted-foreground">
-                                {currentWeather.weather.condition.description}
-                            </span>
                         </div>
                         <img
                             src={currentWeather.weather.condition.icon}

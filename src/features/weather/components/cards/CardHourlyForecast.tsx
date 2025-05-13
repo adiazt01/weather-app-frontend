@@ -47,7 +47,7 @@ export const CardHourlyForecast = ({ forecast, isLoading }: HourlyForecastProps)
                 <CardTitle className="text-base font-medium">Pronóstico por horas</CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="flex flex-row flex-wrap justify-center sm:justify-between w-full gap-2">
+                <div className="flex flex-row flex-wrap justify-center sm:justify-between w-full gap-4">
                     {forecast.forecast.days[0].hourly
                         .filter((_, index) => index % 3 === 0)
                         .slice(0, 8)
@@ -60,7 +60,7 @@ export const CardHourlyForecast = ({ forecast, isLoading }: HourlyForecastProps)
                             const hourLabel = `${h} ${ampm}`;
 
                             return (
-                                <div key={idx} className="flex flex-col items-center gap-1 py-2">
+                                <div key={idx} className="flex flex-col items-center gap-1">
                                     <span className="text-xs text-muted-foreground">{hourLabel}</span>
                                     <img
                                         src={hour.condition.icon || "/placeholder.svg"}

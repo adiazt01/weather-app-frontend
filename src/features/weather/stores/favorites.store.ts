@@ -10,6 +10,7 @@ interface FavoritesState {
     fetchFavorites: () => Promise<void>;
     addFavorite: (favorite: CityFavoriteSchema) => Promise<void>;
     removeFavorite: (id: string) => Promise<void>;
+    clearFavorites: () => void;
 }
 
 export const useFavoritesStore = create<FavoritesState>()(
@@ -63,6 +64,9 @@ export const useFavoritesStore = create<FavoritesState>()(
                     const { favorites } = get();
 
                     return favorites.find((favorite) => favorite.id === id);
+                },
+                clearFavorites: () => {
+                    set({ favorites: [] });
                 }
             }),
             {
