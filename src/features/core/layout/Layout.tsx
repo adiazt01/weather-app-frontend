@@ -7,7 +7,7 @@ export const Layout = () => {
             <Outlet />
             <FloatingMenu />
             <div
-                className="absolute -z-10 inset-0 h-full w-full bg-white bg-[radial-gradient(rgba(0,0,0,0.02)_16px,transparent_16px)] 
+                className="absolute -z-10 inset-0 h-full w-full bg-violet-500/10 to bg-[radial-gradient(rgba(0,0,0,0.02)_16px,transparent_16px)] 
                 [background-size:64px_64px]"
             ></div>
         </>

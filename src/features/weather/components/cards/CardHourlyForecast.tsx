@@ -44,7 +44,7 @@ export const CardHourlyForecast = ({ forecast, isLoading }: HourlyForecastProps)
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-base font-medium">Pronóstico por horas</CardTitle>
+                <CardTitle className="text-violet-950 font-medium">Pronóstico por horas</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="flex flex-row flex-wrap justify-center sm:justify-between w-full gap-4">

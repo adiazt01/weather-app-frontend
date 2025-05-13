@@ -7,7 +7,7 @@ import { mapResponseError } from "@/features/shared/mappers/errors.mappers"
 import type { PaginationResponse } from "@/features/core/interfaces/responses/pagination-response.interface"
 
 export const addCityFavorite = async ({
-    cityFavorite,
+    cityFavorite
 }: { cityFavorite: CityFavoriteSchema }): Promise<CityFavorite> => {
     try {
         const response = await http.post<CreateCityFavoriteResponse>('/favorites', cityFavorite)
@@ -38,7 +38,7 @@ export const getCityFavoriteById = async (id: string): Promise<CityFavorite> => 
     }
 }
 
-export const removeCityFavorite = async (id: number): Promise<void> => {
+export const removeCityFavorite = async (id: string): Promise<void> => {
     try {
         await http.delete(`/favorites/${id}`);
     } catch (error) {

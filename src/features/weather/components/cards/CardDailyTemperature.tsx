@@ -3,6 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { HourlyChartLine } from "../charts/HourlyChartLine";
 import type { CurrentWeather } from "../../interface/current.interface";
 import type { Forecast } from "../../interface/forecast.interface";
+import { Thermometer } from "lucide-react";
 
 interface CardDailyTemperatureCardProps {
     currentWeather: CurrentWeather | undefined;
@@ -33,7 +34,9 @@ export const CardDailyTemperature = ({ currentWeather, forecast, isLoading }: Ca
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-base font-medium">Temperatura durante el día</CardTitle>
+                <CardTitle className="text-violet-950 font-medium">
+                    Temperatura durante el día
+                </CardTitle>
             </CardHeader>
             <CardContent className="h-[200px]">
                 {!isLoading && forecast?.forecast.days[0]?.hourly && <HourlyChartLine forecast={forecast} />}
