@@ -1,6 +1,0 @@
-[submodule "backend"]
-	path = backend
-	url = https://github.com/adiazt01/weather-app-backend.git
-[submodule "frontend"]
-	path = frontend
-	url = https://github.com/adiazt01/weather-app-frontend.git
