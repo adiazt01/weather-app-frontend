@@ -1,6 +1,5 @@
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandList, Command } from "@/components/ui/command";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useFavoritesStore } from "@/features/weather/stores/favorites.store";
 import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { useSearchHistoryStore } from "../../../stores/search-history.store";
 import { useSearchParams } from "react-router";
@@ -8,7 +7,6 @@ import { useCitySearch } from "../../../hooks/useCitySearch";
 import { SearchResultItem } from "./search-result-item/SearchResultItem";
 import type { AutoComplete } from "@/features/weather/interface/autocomplete.interface";
 import { useState } from "react";
-import type { CityFavoriteSchema } from "@/features/weather/schemas/city-favorites.schema";
 
 interface SearchDialogProps {
   open: boolean;
@@ -16,7 +14,6 @@ interface SearchDialogProps {
 }
 
 export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
-  const { favorites, toggleFavorite } = useFavoritesStore();
   const { isAuthenticated } = useAuthStore();
   const { addCityToHistory } = useSearchHistoryStore();
   const [searchQuery, setSearchQuery] = useState("");
@@ -46,12 +43,6 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
     setSearchParams({ city: city.name });
   };
 
-  const handleToggleFavorite = (city: CityFavoriteSchema) => {
-    toggleFavorite(city);
-  };
-
-  const isFavorite = (cityId: string) => favorites.some((fav) => fav.id === cityId);
-
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
       <Command shouldFilter={false}>
@@ -78,9 +69,7 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
                   key={city.id}
                   city={city}
                   isAuthenticated={isAuthenticated}
-                  isFavorite={isFavorite(city.id)}
                   onSelect={handleSelectCity}
-                  onToggleFavorite={handleToggleFavorite}
                 />
               ))}
             </CommandGroup>
