@@ -11,7 +11,6 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <Router />
-      {/* <ReactQueryDevtools /> */}
       <Toaster />
     </QueryClientProvider>
   </StrictMode>,

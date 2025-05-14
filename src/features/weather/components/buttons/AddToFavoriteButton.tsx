@@ -23,7 +23,7 @@ export const AddToFavoriteButton = ({
     return (
         <motion.div
             whileHover={{
-                scale: 1.1,
+                scale: 1.5,
             }}
             whileTap={{
                 scale: 0.9,
@@ -32,7 +32,7 @@ export const AddToFavoriteButton = ({
             <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full"
+                className="rounded-full cursor-pointer hover:bg-muted"
                 onClick={(e) => {
                     e.stopPropagation();
                     handleToggleFavorite({

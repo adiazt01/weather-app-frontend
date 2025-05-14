@@ -16,7 +16,7 @@ export interface CurrentWeather {
         },
         condition: {
             description: string,
-            icon: string,
+            icon: string | null,
         },
         wind: {
             speedKph: number,

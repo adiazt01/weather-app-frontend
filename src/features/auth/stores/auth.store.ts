@@ -28,46 +28,37 @@ export const useAuthStore = create<AuthState>()(
         user: null,
         isAuthenticated: false,
         signIn: async ({ email, password }: SignInParams) => {
-          try {
-            const user = await signIn({ email, password });
-            const decoded: JwtDecoded = jwtDecode(user.token);
+          const user = await signIn({ email, password });
+          const decoded: JwtDecoded = jwtDecode(user.token);
 
-            const authenticatedUser = {
-              id: decoded.id,
-              email: decoded.email,
-              token: user.token,
-              username: user.username,
-            };
-            
-            set({ user: authenticatedUser });
-            set((state) => ({ ...state, user: authenticatedUser }));
-            set({ isAuthenticated: true });
+          const authenticatedUser = {
+            id: decoded.id,
+            email: decoded.email,
+            token: user.token,
+            username: user.username,
+          };
 
-            return authenticatedUser;
-          } catch (error) {
-            throw error;
-          }
+          set({ user: authenticatedUser });
+          set((state) => ({ ...state, user: authenticatedUser }));
+          set({ isAuthenticated: true });
+
+          return authenticatedUser;
         },
         signUp: async ({ email, password, username }: SignUpParams) => {
-          try {
-            const user = await signUp({ email, password, username });
+          const user = await signUp({ email, password, username });
+          const decoded: JwtDecoded = jwtDecode(user.token);
 
-            const decoded: JwtDecoded = jwtDecode(user.token);
+          const authenticatedUser = {
+            id: decoded.id,
+            email: decoded.email,
+            token: user.token,
+            username: user.username,
+          };
 
-            const authenticatedUser = {
-              id: decoded.id,
-              email: decoded.email,
-              token: user.token,
-              username: user.username,
-            };
+          set((state) => ({ ...state, user: authenticatedUser }));
+          set({ isAuthenticated: true });
 
-            set((state) => ({ ...state, user: authenticatedUser }));
-            set({ isAuthenticated: true });
-
-            return authenticatedUser;
-          } catch (error) {
-            throw error;
-          }
+          return authenticatedUser;
         },
         logout: () => {
           set({ user: null, isAuthenticated: false });

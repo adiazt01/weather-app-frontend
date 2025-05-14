@@ -12,12 +12,12 @@ export const CardWeatherHeader = ({ currentWeather, isLoading }: CardWeatherHead
         return (
             <Card>
                 <CardHeader>
-                    <Skeleton className="mx-auto w-32 h-7" />
-                    <Skeleton className="mx-auto w-24 h-5 mt-2" />
+                    <Skeleton className="mx-auto w-32 h-7" role="status" />
+                    <Skeleton className="mx-auto w-24 h-5 mt-2" role="status" />
                 </CardHeader>
                 <CardContent>
-                    <Skeleton className="mx-auto w-32 h-16 mt-2" />
-                    <Skeleton className="w-28 h-5 mt-2" />
+                    <Skeleton className="mx-auto w-32 h-16 mt-2" role="status" />
+                    <Skeleton className="w-28 h-5 mt-2" role="status" />
                 </CardContent>
             </Card>
         );
@@ -92,7 +92,7 @@ export const CardWeatherHeader = ({ currentWeather, isLoading }: CardWeatherHead
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
-                                    d="M12 3v18m0 0a9 9 0 100-18 9 9 0 000 18z"
+                                    d="M12 3v18m0 0a9 9 9 0 100-18 9 9 0 000 18z"
                                 />
                             </svg>
                             <span className="text-lg text-violet-950 font-medium">

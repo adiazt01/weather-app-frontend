@@ -2,7 +2,6 @@ import { CardWeatherHeader } from "../components/cards/CardWeatherHeader";
 import { CardHourlyForecast } from "../components/cards/CardHourlyForecast";
 import { CardDailyTemperature } from "../components/cards/CardDailyTemperature";
 import { useWeather } from "../hooks/useWeather";
-import { FloatingMenu } from "@/features/core/components/float-menu/FloatMenu";
 import { useSearchParams } from "react-router";
 import { AlertTriangle } from "lucide-react";
 
@@ -10,7 +9,7 @@ export const WeatherPage = () => {
     const [searchParams] = useSearchParams();
     const { currentWeather, forecast, isError, isFetching, isFetchingForecast } = useWeather(searchParams.get("city"));
 
-    const hasCriticalError = isError
+    const hasCriticalError = isError;
 
     if (hasCriticalError) {
         return (
@@ -19,15 +18,11 @@ export const WeatherPage = () => {
                     <AlertTriangle className="h-8 w-8 text-destructive" />
                 </div>
                 <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">
-                        Ocurrio un error!
-                    </h3>
-                    <p className="text-sm">
-                        Ocurrio un error al obtener la información del clima. Por favor verifica que la ciudad sea correcta o intenta nuevamente más tarde.
-                    </p>
+                    <h3 className="text-lg font-semibold">Ocurrio un error!</h3>
+                    <p className="text-sm">Ocurrio un error al obtener la información del clima. Por favor verifica que la ciudad sea correcta o intenta nuevamente más tarde.</p>
                 </div>
             </div>
-        )
+        );
     }
 
     return (
@@ -36,5 +31,5 @@ export const WeatherPage = () => {
             <CardHourlyForecast forecast={forecast} isLoading={isFetchingForecast} />
             <CardDailyTemperature currentWeather={currentWeather} forecast={forecast} isLoading={isFetching} />
         </div>
-    )
-}
+    );
+};

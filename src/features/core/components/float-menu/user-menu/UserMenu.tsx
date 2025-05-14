@@ -2,32 +2,19 @@ import { useState } from "react";
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { History, User } from "lucide-react";
 import { useAuthStore } from "@/features/auth/stores/auth.store";
-import { useSearchHistoryStore } from "@/features/core/stores/search-history.store";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { LoginForm } from "@/features/auth/components/forms/LoginForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RegisterForm } from "@/features/auth/components/forms/RegisterForm";
 import { Separator } from "@/components/ui/separator";
-import { useFavoritesStore } from "@/features/weather/stores/favorites.store";
-import type { CityFavorite } from "@/features/weather/interface/city-favorite.interface";
-import { AnimatePresence, motion } from "motion/react";
-import { useSearchParams } from "react-router";
-import { AddToFavoriteButton } from "@/features/weather/components/buttons/AddToFavoriteButton";
+import { motion } from "motion/react";
+import { UserTabs } from "./user-tabs/UserTabs";
+import { User } from "lucide-react";
 
 export const UserMenu = () => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const { isAuthenticated, user, logout } = useAuthStore((state) => state);
-    const { searchHistory } = useSearchHistoryStore((state) => state)
-    const [_, setSearchParams] = useSearchParams();
-
-    const handleSelectCity = (city: CityFavorite) => {
-        setSearchParams({ city: city.name });
-        setUserMenuOpen(false);
-    };
-
-    const { favorites } = useFavoritesStore((state) => state);
 
     return (
         <Sheet open={userMenuOpen} onOpenChange={setUserMenuOpen}>
@@ -61,76 +48,7 @@ export const UserMenu = () => {
                             </div>
                             <Separator />
                         </div>
-
-                        <Tabs className="mt-4" defaultValue="favorites">
-                            <TabsList className="w-full">
-                                <TabsTrigger value="favorites" className="flex-1">
-                                    Favoritos
-                                </TabsTrigger>
-                                <TabsTrigger value="history" className="flex-1">
-                                    Historial
-                                </TabsTrigger>
-                            </TabsList>
-                            <TabsContent value="favorites" className="mt-4 space-y-3">
-                                <AnimatePresence>
-                                    {favorites.length > 0 ? (
-                                        favorites.map((city) => (
-                                            <motion.div
-                                                key={city.id}
-                                                exit={{
-                                                    opacity: 0,
-                                                }}
-                                                className="flex items-center justify-between p-3 px-4 border rounded-md
-                                                hover:bg-muted transition-all duration-200 ease-in-out cursor-pointer"
-                                                whileHover={{ scale: 1.02 }}
-                                                onClick={() => handleSelectCity(city)}
-                                            >
-                                                <div className="flex w-full items-center gap-2">
-                                                    <div>
-                                                        <p className="font-medium">{city.name}</p>
-                                                        <p className="text-sm text-muted-foreground">{city.country}</p>
-                                                    </div>
-                                                </div>
-                                                <AddToFavoriteButton city={city} />
-
-                                            </motion.div>
-                                        ))
-                                    ) : (
-                                        <p className="text-center text-muted-foreground py-4">No tienes ciudades favoritas</p>
-                                    )}
-                                </AnimatePresence>
-                            </TabsContent>
-                            <TabsContent value="history" className="mt-4 space-y-2">
-                                {searchHistory.length > 0 ? (
-                                    searchHistory.map((city) => (
-                                        <motion.div
-                                            key={city.id}
-                                            exit={{
-                                                opacity: 0,
-                                            }}
-                                            className="flex items-center justify-between p-3 px-4 border rounded-md
-                                                hover:bg-muted transition-all duration-200 ease-in-out cursor-pointer"
-                                            whileHover={{ scale: 1.02 }}
-                                            onClick={() => handleSelectCity(city)}
-                                        >
-                                            <div className="flex w-full items-center gap-2">
-                                                <div>
-                                                    <p className="font-medium flex flex-row items-center gap-1">
-                                                        <History className="" size={16} />
-                                                        {city.name}
-                                                    </p>
-                                                    <p className="text-sm text-muted-foreground">{city.country}</p>
-                                                </div>
-                                            </div>
-                                            <AddToFavoriteButton city={city} />
-
-                                        </motion.div>
-                                    ))
-                                ) : (
-                                    <p className="text-center text-muted-foreground py-4">No hay historial de búsqueda</p>
-                                )}
-                            </TabsContent>
-                        </Tabs>
+                        <UserTabs setUserMenuOpen={setUserMenuOpen} />
                     </div>
                 ) : (
                     <div className="py-6 space-y-4">
@@ -173,8 +91,8 @@ export const UserMenu = () => {
                     {isAuthenticated && (
                         <Button variant="destructive" onClick={logout}>
                             Cerrar sesión
-                        </Button>)
-                    }
+                        </Button>
+                    )}
                 </SheetFooter>
             </SheetContent>
         </Sheet>

@@ -16,5 +16,6 @@ export const transformHourlyChartData = (forecast: Forecast) => {
                 icon: hour.condition.icon,
                 time: date.getHours(),
             };
-        });
+        })
+        .slice(0, 8)
 };
